@@ -95,14 +95,12 @@ function Membership() {
                   </li>
                 ))}
               </ul>
-              <Link
-                to={p.ctaTo ?? "/enquiry"}
-                hash={p.ctaHash}
-                search={p.ctaTo ? undefined : { plan: p.name.toLowerCase().replace(/\s+/g, "-") }}
+              <a
+                href={`/enquiry${p.ctaHash ? `#${p.ctaHash}` : `?plan=${encodeURIComponent(p.name)}`}`}
                 className="btn mt-10 w-full"
               >
                 {p.ctaLabel ?? "Enquire about this plan →"}
-              </Link>
+              </a>
             </article>
           ))}
         </div>
@@ -129,7 +127,7 @@ function Membership() {
             <p className="eyebrow">Ready when you are</p>
             <h3 className="mt-4 font-display text-3xl font-bold text-white">Book a session.</h3>
             <p className="mt-4 text-sm text-[var(--gray-light)]">Tell us your goal and preferred time. We'll confirm within 24 hours.</p>
-            <Link to="/enquiry" hash="pt-booking" className="btn btn-primary mt-8 w-full">Book a PT Session →</Link>
+            <a href="/enquiry#pt-booking" className="btn btn-primary mt-8 w-full">Book a PT Session →</a>
           </div>
         </div>
       </section>
