@@ -17,7 +17,8 @@ export const Route = createFileRoute("/")({
 function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const revealRef = useRef<HTMLDivElement>(null);
-  const manifestoRef = useRef<HTMLDivElement>(null);
+  const horizontalRef = useRef<HTMLDivElement>(null);
+  const horizontalContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -48,6 +49,46 @@ function Home() {
         tweens.push(tween);
         if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
       });
+
+      // Horizontal Scroll Pin
+      if (horizontalRef.current && horizontalContainerRef.current) {
+        const tween = gsap.to(horizontalContainerRef.current, {
+          x: () => -(horizontalContainerRef.current!.scrollWidth - window.innerWidth) + "px",
+          ease: "none",
+          scrollTrigger: {
+            trigger: horizontalRef.current,
+            pin: true,
+            scrub: 1,
+            end: () => "+=" + horizontalContainerRef.current!.offsetWidth,
+            invalidateOnRefresh: true,
+          }
+        });
+        tweens.push(tween);
+        if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
+
+        const panels = gsap.utils.toArray<HTMLElement>('.h-panel', horizontalContainerRef.current);
+        panels.forEach((panel, i) => {
+          if (i === 0) return; // Panel A is already visible
+          const content = panel.querySelector('.panel-content');
+          if (content) {
+            const fadeTween = gsap.from(content, {
+              opacity: 0,
+              x: 100,
+              duration: 1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: panel,
+                containerAnimation: tween,
+                start: "left 85%",
+                end: "left 35%",
+                scrub: true,
+              }
+            });
+            tweens.push(fadeTween);
+            if (fadeTween.scrollTrigger) triggers.push(fadeTween.scrollTrigger);
+          }
+        });
+      }
     })();
 
     return () => {
@@ -77,50 +118,64 @@ function Home() {
             111 Fitness Club · Tirur, Kerala — Est. 2020
           </p>
           <div className="hero-sub mt-10 flex flex-wrap gap-4">
-            <Link to="/membership" className="btn btn-primary">Join Now</Link>
-            <Link to="/enquiry" className="btn">Enquire</Link>
+            <div className="relative inline-flex items-center justify-center">
+              {/* rotating ring centered behind the button */}
+              <div className="pointer-events-none absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 md:h-40 md:w-40">
+                <svg viewBox="0 0 200 200" className="spin-ring h-full w-full">
+                  <defs>
+                    <path id="circle" d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0" />
+                  </defs>
+                  <text fontSize="14" fill="var(--gray-light)" letterSpacing="4" fontFamily="Space Grotesk">
+                    <textPath href="#circle">TIRUR · KERALA · 111 FITNESS · 4.7★ RATED · </textPath>
+                  </text>
+                </svg>
+              </div>
+              <Link to="/membership" className="btn btn-primary relative z-10">Join Now</Link>
+            </div>
+            <Link to="/enquiry" className="btn relative z-10">Enquire</Link>
           </div>
-        </div>
-
-        {/* rotating ring */}
-        <div className="pointer-events-none absolute bottom-8 left-6 h-32 w-32 md:h-40 md:w-40">
-          <svg viewBox="0 0 200 200" className="spin-ring h-full w-full">
-            <defs>
-              <path id="circle" d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0" />
-            </defs>
-            <text fontSize="14" fill="var(--gray-light)" letterSpacing="4" fontFamily="Space Grotesk">
-              <textPath href="#circle">TIRUR · KERALA · 111 FITNESS · 4.7★ RATED · </textPath>
-            </text>
-          </svg>
         </div>
       </section>
 
-      {/* MANIFESTO */}
-      <section ref={manifestoRef} className="relative overflow-hidden bg-black border-t border-[#1E1E1E]">
-        <div className="mx-auto max-w-7xl px-6 py-32 flex flex-col items-center gap-24 text-center">
-          <div>
-            <span className="text-neon font-display font-bold leading-none" style={{ fontSize: "clamp(140px, 24vw, 360px)", letterSpacing: "-0.05em" }}>
-              111
-            </span>
-            <p className="eyebrow mt-6">reps · sets · days</p>
-          </div>
-          <div>
-            <blockquote className="max-w-4xl font-display italic text-white" style={{ fontSize: "clamp(32px, 5vw, 72px)", lineHeight: 1.1 }}>
-              "Good equipments. Nice ambience."
-            </blockquote>
-            <p className="eyebrow mt-6">— Google Review, 2024</p>
-            <div className="mt-6 flex justify-center gap-2 text-2xl">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <span key={i} className="text-neon">★</span>
-              ))}
+      {/* HORIZONTAL SCROLL PIN */}
+      <section ref={horizontalRef} className="relative h-screen overflow-hidden bg-black border-t border-[#1E1E1E]">
+        <div ref={horizontalContainerRef} className="flex h-full w-[300vw]">
+          {/* Panel A */}
+          <div className="h-panel flex h-full w-screen flex-col items-center justify-center px-6 text-center">
+            <div className="panel-content">
+              <span className="text-neon font-display font-bold leading-none" style={{ fontSize: "clamp(140px, 24vw, 360px)", letterSpacing: "-0.05em" }}>
+                111
+              </span>
+              <p className="eyebrow mt-6 text-[var(--gray-light)]">reps · sets · days</p>
             </div>
           </div>
-          <div>
-            <p className="max-w-3xl font-display font-bold text-white" style={{ fontSize: "clamp(32px, 5vw, 64px)", lineHeight: 1.05, letterSpacing: "-0.03em" }}>
-              We don't count your calories.<br />
-              We count your <span className="text-neon">comebacks.</span>
-            </p>
-            <Link to="/membership" className="btn btn-primary mt-10">See Plans →</Link>
+
+          {/* Panel B */}
+          <div className="h-panel flex h-full w-screen flex-col items-center justify-center px-6 text-center">
+            <div className="panel-content">
+              <blockquote className="max-w-4xl font-display italic text-white" style={{ fontSize: "clamp(32px, 5vw, 72px)", lineHeight: 1.1 }}>
+                "Good equipments. Nice ambience."
+              </blockquote>
+              <p className="eyebrow mt-6 text-[var(--gray-light)]">— Google Review, 2024</p>
+              <div className="mt-8 flex justify-center gap-4 text-[var(--gray-light)]">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <StarIcon key={i} filled={i === 0} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Panel C */}
+          <div className="h-panel flex h-full w-screen flex-col items-center justify-center px-6 text-center">
+            <div className="panel-content">
+              <p className="max-w-3xl font-display font-bold text-white" style={{ fontSize: "clamp(32px, 5vw, 64px)", lineHeight: 1.05, letterSpacing: "-0.03em" }}>
+                We don't count your calories.<br />
+                We count your <span className="text-neon">comebacks.</span>
+              </p>
+              <Link to="/membership" className="btn btn-primary group mt-12 inline-flex items-center gap-2 font-display text-2xl font-bold uppercase text-neon hover:text-white transition-colors">
+                See Plans <span className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -163,7 +218,7 @@ function Home() {
             <p className="eyebrow mb-4">Weekly Schedule</p>
             <table className="w-full text-sm">
               <tbody>
-                {["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].map((d) => (
+                {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((d) => (
                   <tr key={d} className="border-b border-[#1E1E1E]">
                     <td className="py-3 font-display uppercase tracking-wider text-white">{d}</td>
                     <td className="py-3 text-right text-[var(--gray-light)]">6–10 AM · 5–10 PM</td>
@@ -197,6 +252,14 @@ function Home() {
         </div>
       </section>
     </>
+  );
+}
+
+function StarIcon({ filled = false }: { filled?: boolean }) {
+  return (
+    <svg width="40" height="40" viewBox="0 0 24 24" fill={filled ? "var(--neon-yellow)" : "none"} stroke={filled ? "var(--neon-yellow)" : "currentColor"} strokeWidth="1.5">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" />
+    </svg>
   );
 }
 
