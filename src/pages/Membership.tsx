@@ -1,17 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-export const Route = createFileRoute("/membership")({
-  head: () => ({
-    meta: [
-      { title: "Membership Plans | 111 Fitness Club, Tirur" },
-      { name: "description", content: "Simple, transparent membership plans. Monthly to annual. Mens, Ladies, Cardio-only and Premium PT. No lock-ins, no hidden fees." },
-      { property: "og:title", content: "Membership Plans | 111 Fitness Club" },
-      { property: "og:description", content: "Simple. No hidden fees. No lock-ins." },
-    ],
-  }),
-  component: Membership,
-});
-
+import { useEffect } from "react";
 type Plan = {
   name: string;
   priceLines: string[];
@@ -51,7 +38,11 @@ const plans: Plan[] = [
   },
 ];
 
-function Membership() {
+export function Membership() {
+  useEffect(() => {
+    document.title = "Membership Plans | 111 Fitness Club, Tirur";
+  }, []);
+
   return (
     <>
       <section className="px-6 pt-24 pb-12">

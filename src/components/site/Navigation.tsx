@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { NavLink as Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import logoAsset from "@/assets/logo-111.png";
 
@@ -57,7 +57,7 @@ export function Navigation() {
               <li key={l.to}>
                 <Link
                   to={l.to}
-                  activeProps={{ style: { color: "var(--neon-yellow)" } }}
+                  style={({ isActive }) => (isActive ? { color: "var(--neon-yellow)" } : {})}
                   className="font-display text-sm uppercase tracking-wider text-white transition-colors hover:text-[var(--neon-yellow)]"
                 >
                   {l.label}

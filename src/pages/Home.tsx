@@ -1,20 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { ReviewMarquee } from "../components/site/ReviewMarquee";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "111 Fitness Club | Tirur, Kerala — 4.7★ Rated Gym" },
-      { name: "description", content: "Serious equipment. Real results. 111 Fitness Club in Tirur is Kerala's most-reviewed neighbourhood gym. Join now or book a personal training session." },
-      { property: "og:title", content: "111 Fitness Club | Tirur" },
-      { property: "og:description", content: "Serious equipment. Real results. Tirur's most reviewed gym." },
-    ],
-  }),
-  component: Home,
-});
-
-function Home() {
+export function Home() {
+  useEffect(() => {
+    document.title = "111 Fitness Club | Tirur, Kerala — 4.7★ Rated Gym";
+  }, []);
   const heroRef = useRef<HTMLDivElement>(null);
   const revealRef = useRef<HTMLDivElement>(null);
   const horizontalRef = useRef<HTMLDivElement>(null);

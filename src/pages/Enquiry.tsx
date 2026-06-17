@@ -1,22 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+
 import { useEffect, useState, type FormEvent } from "react";
 
-export const Route = createFileRoute("/enquiry")({
-  head: () => ({
-    meta: [
-      { title: "Enquire | 111 Fitness Club, Tirur" },
-      { name: "description", content: "Book a personal training session, request a callback, or chat with us on WhatsApp. We reply within an hour." },
-      { property: "og:title", content: "Enquire | 111 Fitness Club" },
-      { property: "og:description", content: "Book a PT session or request a callback. We reply within an hour." },
-    ],
-  }),
-  component: Enquiry,
-});
-
-function Enquiry() {
+export function Enquiry() {
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
+    document.title = "Enquire | 111 Fitness Club, Tirur";
     if (typeof window === "undefined") return;
     const { hash } = window.location;
     if (hash) {

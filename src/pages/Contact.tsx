@@ -1,26 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReviewMarquee } from "../components/site/ReviewMarquee";
-
-export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Visit Us | 111 Fitness Club, Tirur" },
-      { name: "description", content: "Find 111 Fitness Club near Kundanath Kadavu Bridge, Chembra, Tirur, Kerala. Open daily 6–10 AM and 5–10 PM. Call +91 98471 12294." },
-      { property: "og:title", content: "Visit 111 Fitness Club, Tirur" },
-      { property: "og:description", content: "Near Kundanath Kadavu Bridge, Chembra, Tirur. Open daily." },
-    ],
-  }),
-  component: Contact,
-});
-
 const ADDRESS = `111 Fitness Club
 Near Kundanath Kadavu Bridge
 Chembra, Tirur
 Kerala — 676307`;
 
-function Contact() {
+export function Contact() {
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    document.title = "Visit Us | 111 Fitness Club, Tirur";
+  }, []);
 
   const copy = async () => {
     try {
