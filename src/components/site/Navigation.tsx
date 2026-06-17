@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
+import logoAsset from "@/assets/logo-111.png.asset.json";
 
 const links = [
   { to: "/", label: "Home" },
@@ -16,10 +17,14 @@ export function Navigation() {
       style={{ background: "rgba(10,10,10,0.92)", backdropFilter: "blur(12px)", borderBottom: "1px solid #1E1E1E" }}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link to="/" className="flex items-baseline gap-3" onClick={() => setOpen(false)}>
-          <span className="font-display text-3xl font-bold leading-none tracking-tighter" style={{ borderBottom: "2px solid var(--neon-yellow)", paddingBottom: 2 }}>
-            111
-          </span>
+        <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+          <img
+            src={logoAsset.url}
+            alt="111 Fitness Club logo"
+            className="h-10 w-auto md:h-12"
+            loading="eager"
+            decoding="async"
+          />
           <span className="eyebrow hidden sm:inline">Fitness Club</span>
         </Link>
 

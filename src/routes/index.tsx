@@ -21,49 +21,40 @@ function Home() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    let cleanup = () => {};
+    let cancelled = false;
+    const triggers: Array<{ kill: (revert?: boolean) => void }> = [];
+    const tweens: Array<{ kill: () => void }> = [];
+
     (async () => {
       const gsapMod = await import("gsap");
       const stMod = await import("gsap/ScrollTrigger");
+      if (cancelled) return;
       const gsap = gsapMod.default;
       const ScrollTrigger = stMod.ScrollTrigger;
       gsap.registerPlugin(ScrollTrigger);
 
-      // hero letters
       const letters = heroRef.current?.querySelectorAll(".hero-letter");
       if (letters?.length) {
-        gsap.from(letters, { y: 80, opacity: 0, duration: 0.6, ease: "power4.out", stagger: 0.04, delay: 0.15 });
+        tweens.push(gsap.from(letters, { y: 80, opacity: 0, duration: 0.6, ease: "power4.out", stagger: 0.04, delay: 0.15 }));
       }
       const sub = heroRef.current?.querySelector(".hero-sub");
-      if (sub) gsap.from(sub, { y: 20, opacity: 0, duration: 0.6, delay: 1.0 });
+      if (sub) tweens.push(gsap.from(sub, { y: 20, opacity: 0, duration: 0.6, delay: 1.0 }));
 
-      if (window.innerWidth >= 768) {
-        // reveal blocks
-        revealRef.current?.querySelectorAll(".reveal").forEach((el) => {
-          gsap.from(el, {
-            scrollTrigger: { trigger: el, start: "top 85%" },
-            y: 60, opacity: 0, duration: 0.75, ease: "power3.out",
-          });
+      revealRef.current?.querySelectorAll(".reveal").forEach((el) => {
+        const tween = gsap.from(el, {
+          scrollTrigger: { trigger: el, start: "top 85%" },
+          y: 60, opacity: 0, duration: 0.75, ease: "power3.out",
         });
-
-        // manifesto horizontal pin
-        const container = manifestoRef.current;
-        if (container) {
-          const track = container.querySelector(".manifesto-track") as HTMLElement | null;
-          if (track) {
-            const distance = track.scrollWidth - window.innerWidth;
-            gsap.to(track, {
-              x: -distance,
-              ease: "none",
-              scrollTrigger: { trigger: container, pin: true, scrub: 1, end: () => `+=${distance}` },
-            });
-          }
-        }
-      }
-
-      cleanup = () => ScrollTrigger.getAll().forEach((t) => t.kill());
+        tweens.push(tween);
+        if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
+      });
     })();
-    return () => cleanup();
+
+    return () => {
+      cancelled = true;
+      triggers.forEach((t) => t.kill(true));
+      tweens.forEach((t) => t.kill());
+    };
   }, []);
 
   const built = "BUILT".split("");
@@ -104,27 +95,27 @@ function Home() {
         </div>
       </section>
 
-      {/* MANIFESTO horizontal scroll */}
-      <section ref={manifestoRef} className="relative overflow-hidden bg-black">
-        <div className="manifesto-track flex" style={{ width: "300vw" }}>
-          <div className="flex h-screen w-screen flex-col items-center justify-center px-8 text-center">
-            <span className="text-neon font-display font-bold leading-none" style={{ fontSize: "clamp(180px, 30vw, 420px)", letterSpacing: "-0.05em" }}>
+      {/* MANIFESTO */}
+      <section ref={manifestoRef} className="relative overflow-hidden bg-black border-t border-[#1E1E1E]">
+        <div className="mx-auto max-w-7xl px-6 py-32 flex flex-col items-center gap-24 text-center">
+          <div>
+            <span className="text-neon font-display font-bold leading-none" style={{ fontSize: "clamp(140px, 24vw, 360px)", letterSpacing: "-0.05em" }}>
               111
             </span>
             <p className="eyebrow mt-6">reps · sets · days</p>
           </div>
-          <div className="flex h-screen w-screen flex-col items-center justify-center px-8 text-center">
-            <blockquote className="max-w-4xl font-display italic text-white" style={{ fontSize: "clamp(36px, 6vw, 84px)", lineHeight: 1.1 }}>
+          <div>
+            <blockquote className="max-w-4xl font-display italic text-white" style={{ fontSize: "clamp(32px, 5vw, 72px)", lineHeight: 1.1 }}>
               "Good equipments. Nice ambience."
             </blockquote>
             <p className="eyebrow mt-6">— Google Review, 2024</p>
-            <div className="mt-6 flex gap-2 text-2xl">
+            <div className="mt-6 flex justify-center gap-2 text-2xl">
               {[0, 1, 2, 3, 4].map((i) => (
                 <span key={i} className="text-neon">★</span>
               ))}
             </div>
           </div>
-          <div className="flex h-screen w-screen flex-col items-center justify-center px-8 text-center">
+          <div>
             <p className="max-w-3xl font-display font-bold text-white" style={{ fontSize: "clamp(32px, 5vw, 64px)", lineHeight: 1.05, letterSpacing: "-0.03em" }}>
               We don't count your calories.<br />
               We count your <span className="text-neon">comebacks.</span>
