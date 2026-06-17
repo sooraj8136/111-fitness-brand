@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 type Plan = {
   name: string;
   priceLines: string[];
@@ -86,12 +87,12 @@ export function Membership() {
                   </li>
                 ))}
               </ul>
-              <a
-                href={`/enquiry${p.ctaHash ? `#${p.ctaHash}` : `?plan=${encodeURIComponent(p.name)}`}`}
+              <Link
+                to={`/enquiry${p.ctaHash ? `#${p.ctaHash}` : `?plan=${encodeURIComponent(p.name)}`}`}
                 className="btn mt-10 w-full"
               >
                 {p.ctaLabel ?? "Enquire about this plan →"}
-              </a>
+              </Link>
             </article>
           ))}
         </div>
@@ -118,7 +119,7 @@ export function Membership() {
             <p className="eyebrow">Ready when you are</p>
             <h3 className="mt-4 font-display text-3xl font-bold text-white">Book a session.</h3>
             <p className="mt-4 text-sm text-[var(--gray-light)]">Tell us your goal and preferred time. We'll confirm within 24 hours.</p>
-            <a href="/enquiry#pt-booking" className="btn btn-primary mt-8 w-full">Book a PT Session →</a>
+            <Link to="/enquiry#pt-booking" className="btn btn-primary mt-8 w-full">Book a PT Session →</Link>
           </div>
         </div>
       </section>

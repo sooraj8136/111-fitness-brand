@@ -1,18 +1,20 @@
 
 import { useEffect, useState, type FormEvent } from "react";
+import { useLocation } from "react-router-dom";
 
 export function Enquiry() {
   const [toast, setToast] = useState<string | null>(null);
+  const { hash } = useLocation();
 
   useEffect(() => {
     document.title = "Enquire | 111 Fitness Club, Tirur";
-    if (typeof window === "undefined") return;
-    const { hash } = window.location;
-    if (hash) {
-      const el = document.querySelector(hash);
-      el?.scrollIntoView({ behavior: "smooth" });
-    }
   }, []);
+
+  useEffect(() => {
+    if (!hash) return;
+    const el = document.querySelector(hash);
+    el?.scrollIntoView({ behavior: "smooth" });
+  }, [hash]);
 
   const showToast = (msg: string) => {
     setToast(msg);

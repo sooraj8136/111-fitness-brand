@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { ScrollToTop } from "./components/ScrollToTop";
 import { Navigation } from "./components/site/Navigation";
 import { Footer } from "./components/site/Footer";
 import { WhatsAppButton } from "./components/site/WhatsAppButton";
@@ -11,6 +12,7 @@ import { Contact } from "./pages/Contact";
 export default function App() {
   return (
     <>
+      <ScrollToTop />
       <Navigation />
       <main className="min-h-screen pt-[64px]">
         <Routes>

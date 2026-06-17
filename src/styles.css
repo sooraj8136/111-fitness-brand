@@ -1,4 +1,5 @@
-@import "tailwindcss" source(none);
+@import "tailwindcss";
+/* @import "tailwindcss" source(none); */
 @source "../src";
 @import "tw-animate-css";
 
@@ -247,3 +248,65 @@
 
 /* Hero letter base */
 .hero-letter { display: inline-block; }
+
+/* Horizontal scroll — premium panels */
+.h-scroll-section {
+  background: #050505;
+}
+
+.h-scroll-track {
+  backface-visibility: hidden;
+}
+
+.h-panel {
+  isolation: isolate;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.panel-bg-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.32;
+  filter: grayscale(0.25) contrast(1.1);
+  transform: translateZ(0);
+}
+
+.panel-bg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 50%, rgba(5, 5, 5, 0.15) 0%, rgba(5, 5, 5, 0.75) 100%),
+    linear-gradient(to bottom, rgba(5, 5, 5, 0.35) 0%, rgba(5, 5, 5, 0.65) 100%);
+}
+
+.panel-content {
+  text-shadow: 0 4px 48px rgba(0, 0, 0, 0.85);
+}
+
+.h-panel {
+  position: relative;
+}
+
+.h-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    transparent 20%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+  pointer-events: none;
+}
+
+.panel-content {
+  will-change: transform, opacity;
+}
