@@ -196,9 +196,9 @@ function Home() {
             </p>
           </div>
           <div className="flex flex-wrap gap-4">
-            <Link to="/enquiry" hash="callback" className="btn" style={{ borderColor: "#000", color: "#000" }}>
+            <a href="/enquiry#callback" className="btn" style={{ borderColor: "#000", color: "#000" }}>
               Book a Callback
-            </Link>
+            </a>
             <a href="https://wa.me/919847112294" target="_blank" rel="noreferrer" className="btn btn-whatsapp">
               WhatsApp Us
             </a>
