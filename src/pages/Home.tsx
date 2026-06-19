@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ReviewMarquee } from "../components/site/ReviewMarquee";
+import heroAthlete from "@/assets/111-fitness-club.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,8 +131,18 @@ export function Home() {
   return (
     <div ref={rootRef}>
       {/* HERO */}
-      <section ref={heroRef} className="relative flex min-h-[92vh] items-center overflow-hidden px-6">
-        <div className="mx-auto w-full max-w-7xl">
+      <section ref={heroRef} className="hero-section relative flex min-h-[92vh] items-center overflow-hidden px-6">
+        <div className="hero-club-visual" aria-hidden="true">
+          <img
+            src={heroAthlete}
+            alt=""
+            className="hero-club-visual__img"
+            loading="eager"
+            decoding="async"
+            style={{ opacity: 0.75 }}
+          />
+        </div>
+        <div className="relative z-10 mx-auto w-full max-w-7xl">
           <h1 className="font-display font-bold text-white" style={{ fontSize: "clamp(64px, 11vw, 148px)", letterSpacing: "-0.04em", lineHeight: 0.92 }}>
             <span className="block">
               {built.map((c, i) => <span key={i} className="hero-letter">{c}</span>)}
@@ -151,127 +162,127 @@ export function Home() {
                     <path id="circle" d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0" />
                   </defs>
                   <text fontSize="14" fill="var(--gray-light)" letterSpacing="4" fontFamily="Space Grotesk">
-                    <textPath href="#circle">TIRUR · KERALA · 111 FITNESS · 4.7★ RATED · </textPath>
+                    {/* <textPath href="#circle">TIRUR · KERALA · 111 FITNESS · 4.7★ RATED · </textPath> */}
                   </text>
                 </svg>
               </div>
               <Link to="/membership" className="btn btn-primary relative z-10">Join Now</Link>
             </div>
-            <Link to="/enquiry" className="btn relative z-10">Enquire</Link>
+            <Link to="/enquiry" className="btn relative z-10" style={{ backgroundColor: "#000", color: "#fff" }}>Enquire</Link>
           </div>
         </div>
       </section>
 
       {/* HORIZONTAL SCROLL PIN */}
-<section
-  ref={horizontalRef}
-  className="relative h-screen overflow-hidden bg-black border-t border-[#1E1E1E]"
->
-  <div
-    ref={horizontalContainerRef}
-    className="flex h-full w-[300vw]"
-  >
-    {/* PANEL 1 */}
-    <div className="h-panel relative flex h-full w-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2000&auto=format&fit=crop')",
-        }}
-      />
-
-      <div className="absolute inset-0 bg-black/60" />
-
-      <div className="panel-content relative z-10">
-        <span
-          className="text-neon font-display font-bold leading-none"
-          style={{
-            fontSize: "clamp(180px, 30vw, 520px)",
-            letterSpacing: "-0.08em",
-          }}
+      <section
+        ref={horizontalRef}
+        className="relative h-screen overflow-hidden bg-black border-t border-[#1E1E1E]"
+      >
+        <div
+          ref={horizontalContainerRef}
+          className="flex h-full w-[300vw]"
         >
-          111
-        </span>
+          {/* PANEL 1 */}
+          <div className="h-panel relative flex h-full w-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage:
+                  "url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2000&auto=format&fit=crop')",
+              }}
+            />
 
-        <p className="mt-6 text-xl uppercase tracking-[0.4em] text-[var(--gray-light)]">
-          reps · sets · days
-        </p>
-      </div>
-    </div>
+            <div className="absolute inset-0 bg-black/60" />
 
-    {/* PANEL 2 */}
-    <div className="h-panel relative flex h-full w-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=2000&auto=format&fit=crop')",
-        }}
-      />
+            <div className="panel-content relative z-10">
+              <span
+                className="text-neon font-display font-bold leading-none"
+                style={{
+                  fontSize: "clamp(180px, 30vw, 520px)",
+                  letterSpacing: "-0.08em",
+                }}
+              >
+                111
+              </span>
 
-      <div className="absolute inset-0 bg-black/65" />
+              <p className="mt-6 whitespace-nowrap text-sm uppercase tracking-[0.22em] text-[var(--gray-light)] md:text-xl md:tracking-[0.4em]">
+                reps · sets · days
+              </p>
+            </div>
+          </div>
 
-      <div className="panel-content relative z-10">
-        <blockquote
-          className="max-w-5xl font-display font-bold italic text-white"
-          style={{
-            fontSize: "clamp(48px, 8vw, 120px)",
-            lineHeight: 1,
-          }}
-        >
-          "DON'T DREAM IT,
-          <br />
-          DO IT!"
-        </blockquote>
+          {/* PANEL 2 */}
+          <div className="h-panel relative flex h-full w-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage:
+                  "url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=2000&auto=format&fit=crop')",
+              }}
+            />
 
-        {/* <div className="mt-10 flex justify-center gap-4 text-[var(--gray-light)]">
+            <div className="absolute inset-0 bg-black/65" />
+
+            <div className="panel-content relative z-10">
+              <blockquote
+                className="max-w-5xl font-display font-bold italic text-white"
+                style={{
+                  fontSize: "clamp(48px, 8vw, 120px)",
+                  lineHeight: 1,
+                }}
+              >
+                "DON'T DREAM IT,
+                <br />
+                DO IT!"
+              </blockquote>
+
+              {/* <div className="mt-10 flex justify-center gap-4 text-[var(--gray-light)]">
           {[0, 1, 2, 3, 4].map((i) => (
             <StarIcon key={i} filled />
           ))}
         </div> */}
-      </div>
-    </div>
+            </div>
+          </div>
 
-    {/* PANEL 3 */}
-    <div className="h-panel relative flex h-full w-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=2000&auto=format&fit=crop')",
-        }}
-      />
+          {/* PANEL 3 */}
+          <div className="h-panel relative flex h-full w-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage:
+                  "url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=2000&auto=format&fit=crop')",
+              }}
+            />
 
-      <div className="absolute inset-0 bg-black/65" />
+            <div className="absolute inset-0 bg-black/65" />
 
-      <div className="panel-content relative z-10">
-        <p
-          className="max-w-5xl font-display font-bold text-white"
-          style={{
-            fontSize: "clamp(50px, 8vw, 110px)",
-            lineHeight: 0.95,
-            letterSpacing: "-0.04em",
-          }}
-        >
-          SET YOUR BODY
-          <br />
-          YOUR OWN AMBITION
-        </p>
+            <div className="panel-content relative z-10">
+              <p
+                className="max-w-5xl font-display font-bold text-white"
+                style={{
+                  fontSize: "clamp(50px, 8vw, 110px)",
+                  lineHeight: 0.95,
+                  letterSpacing: "-0.04em",
+                }}
+              >
+                SET YOUR BODY
+                <br />
+                YOUR OWN AMBITION
+              </p>
 
-        <Link
-          to="/membership"
-          className="group mt-12 inline-flex items-center gap-3 border border-[#fbff00] px-10 py-5 font-display text-3xl font-bold uppercase text-neon transition-all duration-300 hover:bg-[#000000] hover:text-black"
-        >
-          See Plans
-          <span className="transition-transform duration-300 group-hover:translate-x-2">
-            →
-          </span>
-        </Link>
-      </div>
-    </div>
-  </div>
-</section>
+              <Link
+  to="/membership"
+  className="group mt-8 inline-flex items-center gap-2 border border-[#fbff00] px-6 py-3 font-display text-base font-bold uppercase text-neon transition-all duration-300 hover:bg-[var(--neon-yellow)] hover:text-black hover:border-[var(--neon-yellow)] md:mt-12 md:gap-3 md:px-10 md:py-5 md:text-3xl"
+>
+  <span className="group-hover:text-black">See Plans</span>
+  <span className="transition-transform duration-300 group-hover:translate-x-2 group-hover:text-black">
+    →
+  </span>
+</Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* WHY 111 */}
       <section ref={revealRef} className="border-t border-[#1E1E1E] px-6 py-24">

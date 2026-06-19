@@ -249,6 +249,70 @@
 /* Hero letter base */
 .hero-letter { display: inline-block; }
 
+.hero-title-different {
+  white-space: nowrap;
+  font-size: clamp(42px, 12.5vw, 148px);
+  letter-spacing: -0.04em;
+}
+
+.hero-section {
+  background: #0a0a0a;
+}
+
+.hero-club-visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+  width: clamp(140px, 42vw, 520px);
+}
+
+.hero-club-visual__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+
+.hero-club-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    #0a0a0a 0%,
+    rgba(10, 10, 10, 0.55) 18%,
+    rgba(10, 10, 10, 0.15) 38%,
+    transparent 52%
+  );
+}
+
+@media (max-width: 767px) {
+  .hero-club-visual {
+    width: min(72vw, 320px);
+  }
+
+  .hero-club-visual__img {
+    object-position: right top;
+  }
+
+  .hero-title-different {
+    font-size: clamp(34px, 10.8vw, 64px);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-club-visual {
+    width: clamp(220px, 32vw, 520px);
+  }
+}
+
 /* Horizontal scroll — premium panels */
 .h-scroll-section {
   background: #050505;
@@ -309,4 +373,8 @@
 
 .panel-content {
   will-change: transform, opacity;
+}
+
+.hero-club-visual__img {
+  opacity: 0.5; /* 50% opacity */
 }
