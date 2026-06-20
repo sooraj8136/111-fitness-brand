@@ -294,22 +294,37 @@
 }
 
 @media (max-width: 767px) {
+  .hero-section {
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
   .hero-club-visual {
-    width: min(72vw, 320px);
-    transform: translateX(50%);
-    top: 40%;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    transform: none;
+    margin-top: 0;
+    order: 0;
   }
 
   .hero-club-visual__img {
-    object-position: right top;
+    object-position: center;
+    opacity: 0.9 !important;
+    max-height: none;
+    border-radius: 0;
   }
 
   .hero-club-visual::before {
+    display: block;
     background: linear-gradient(
-      to right,
-      #0a0a0a 0%,
-      rgba(10, 10, 10, 0.05) 12%,
-      transparent 25%
+      to top,
+      rgba(10, 10, 10, 0.95) 0%,
+      rgba(10, 10, 10, 0.5) 40%,
+      transparent 80%
     );
   }
 
