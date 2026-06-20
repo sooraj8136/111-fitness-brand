@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ReviewMarquee } from "../components/site/ReviewMarquee";
-import heroAthlete from "@/assets/111-fitness-club.png";
+import heroAthlete from "@/assets/111-fitness-clubimage.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
