@@ -296,10 +296,21 @@
 @media (max-width: 767px) {
   .hero-club-visual {
     width: min(72vw, 320px);
+    transform: translateX(50%);
+    top: 40%;
   }
 
   .hero-club-visual__img {
     object-position: right top;
+  }
+
+  .hero-club-visual::before {
+    background: linear-gradient(
+      to right,
+      #0a0a0a 0%,
+      rgba(10, 10, 10, 0.05) 12%,
+      transparent 25%
+    );
   }
 
   .hero-title-different {

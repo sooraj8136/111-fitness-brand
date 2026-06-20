@@ -144,32 +144,32 @@ export function Home() {
         </div>
         <div className="relative z-10 mx-auto w-full max-w-7xl">
           <h1
-  className="font-display font-bold text-white"
-  style={{
-    fontSize: "clamp(64px, 11vw, 148px)",
-    letterSpacing: "-0.04em",
-    lineHeight: 0.92,
-  }}
->
-  <span className="block">
-    {built.map((c, i) => (
-      <span key={i} className="hero-letter">
-        {c}
-      </span>
-    ))}
-  </span>
+            className="font-display font-bold text-white"
+            style={{
+              fontSize: "clamp(64px, 11vw, 148px)",
+              letterSpacing: "-0.04em",
+              lineHeight: 0.92,
+            }}
+          >
+            <span className="block">
+              {built.map((c, i) => (
+                <span key={i} className="hero-letter">
+                  {c}
+                </span>
+              ))}
+            </span>
 
-  <span
-    className="block text-neon"
-    style={{ fontSize: "0.85em" }} // decrease DIFFERENT size
-  >
-    {different.map((c, i) => (
-      <span key={i} className="hero-letter">
-        {c}
-      </span>
-    ))}
-  </span>
-</h1>
+            <span
+              className="block text-neon"
+              style={{ fontSize: "0.85em" }} // decrease DIFFERENT size
+            >
+              {different.map((c, i) => (
+                <span key={i} className="hero-letter">
+                  {c}
+                </span>
+              ))}
+            </span>
+          </h1>
           <p className="hero-sub mt-8 max-w-xl text-base text-[var(--gray-light)]">
             111 Fitness Club · Tirur, Kerala — Est. 2020
           </p>
