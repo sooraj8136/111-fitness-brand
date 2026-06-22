@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Instagram } from "lucide-react";
 
 export function Footer() {
   return (
@@ -31,9 +32,26 @@ export function Footer() {
               </li>
             ))}
           </ul>
-          <a href="https://wa.me/919847112294" target="_blank" rel="noreferrer" className="btn btn-whatsapp">
-            Chat on WhatsApp
-          </a>
+          <div className="flex items-center gap-4">
+  <a
+    href="https://wa.me/919847112294"
+    target="_blank"
+    rel="noreferrer"
+    className="btn btn-whatsapp"
+  >
+    Chat on WhatsApp
+  </a>
+
+  <a
+    href="https://instagram.com/YOUR_INSTAGRAM_USERNAME"
+    target="_blank"
+    rel="noreferrer"
+    aria-label="Instagram"
+    className="flex h-11 w-11 items-center justify-center rounded-full border border-[#1E1E1E] text-white transition hover:border-[var(--neon-yellow)] hover:text-[var(--neon-yellow)]"
+  >
+    <Instagram size={20} />
+  </a>
+</div>
         </div>
       </div>
       <div className="mx-auto mt-12 max-w-7xl border-t border-[#1E1E1E] pt-6 text-xs uppercase tracking-widest text-[var(--gray)]">
