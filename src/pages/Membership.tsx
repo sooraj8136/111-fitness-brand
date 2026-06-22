@@ -48,10 +48,20 @@ export function Membership() {
     <>
       <section className="px-6 pt-24 pb-12">
         <div className="mx-auto max-w-7xl">
-          <h1 className="font-display font-bold text-white" style={{ fontSize: "clamp(64px, 11vw, 148px)", letterSpacing: "-0.04em", lineHeight: 0.92 }}>
+          <p className="eyebrow">Membership</p>
+
+          <h1
+            className="mt-4 font-display font-bold text-white"
+            style={{
+              fontSize: "clamp(64px, 11vw, 148px)",
+              letterSpacing: "-0.04em",
+              lineHeight: 0.92,
+            }}
+          >
             Plans.
           </h1>
-          <p className="mt-6 max-w-xl text-base text-[var(--gray-light)]">
+
+          <p className="mt-10 max-w-xl text-base text-[var(--gray-light)]">
             Simple. No hidden fees. No lock-ins. Pick what fits your training.
           </p>
         </div>

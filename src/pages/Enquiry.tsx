@@ -1,6 +1,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { useLocation } from "react-router-dom";
+import { FaWhatsapp } from "react-icons/fa";
 
 export function Enquiry() {
   const [toast, setToast] = useState<string | null>(null);
@@ -36,13 +37,23 @@ export function Enquiry() {
       )}
 
       <section className="px-6 pt-24 pb-12">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-7xl">
           <p className="eyebrow">Enquire</p>
-          <h1 className="mt-4 font-display font-bold text-white" style={{ fontSize: "clamp(48px, 8vw, 100px)", letterSpacing: "-0.04em", lineHeight: 0.95 }}>
+
+          <h1
+            className="mt-4 font-display font-bold text-white"
+            style={{
+              fontSize: "clamp(64px, 11vw, 148px)",
+              letterSpacing: "-0.04em",
+              lineHeight: 0.92,
+            }}
+          >
             Talk to us.
           </h1>
-          <p className="mt-6 max-w-xl text-base text-[var(--gray-light)]">
-            Three ways to reach the gym. Book a personal training session, request a callback, or message us directly on WhatsApp.
+
+          <p className="mt-10 max-w-xl text-base text-[var(--gray-light)]">
+            Three ways to reach the gym. Book a personal training session,
+            request a callback, or message us directly on WhatsApp.
           </p>
         </div>
       </section>
@@ -135,9 +146,7 @@ export function Enquiry() {
           <a href="https://wa.me/919847112294" target="_blank" rel="noreferrer"
             className="group bg-surface border border-[#1E1E1E] p-10 transition-colors hover:border-[var(--neon-yellow)]"
             style={{ borderRadius: 2 }}>
-            <div style={{ color: "#25D366" }}>
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.42c-.003 6.555-5.338 11.89-11.893 11.89a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg>
-            </div>
+            <FaWhatsapp size={40} color="#25D366" />
             <h3 className="mt-6 font-display text-2xl font-bold text-white">Chat on WhatsApp</h3>
             <p className="mt-2 text-sm text-[var(--gray-light)]">Usually replies within an hour.</p>
           </a>
